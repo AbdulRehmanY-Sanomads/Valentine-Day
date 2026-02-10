@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💘 A Question for You</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+
+<body>
+    <!-- Background Music -->
+    <audio id="bg-music" autoplay loop>
+        <source src="assets/Valentine.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        <!-- Question Card -->
+        <div id="question-card" class="card">
+            <!-- Typewriter Poem -->
+            <div class="typewriter-container">
+                <p id="typewriter-text" class="typewriter-text"></p>
+            </div>
+
+            <h1 id="greeting" class="main-heading">
+                <span id="name-container">Can I be your's this <span
+                        class="bg-gradient-to-r from-pink-500 via-purple-500 to-red-500 bg-clip-text text-transparent animated-text">Valentine's
+                    </span>?</span><br>
+                <h3 class="custom-heading">Or I can Say👇</h3>
+            </h1>
+
+            <h2 id="sub-question" class="sub-heading">
+                Will you be my <span
+                    class="bg-gradient-to-r from-pink-500 via-purple-500 to-red-500 bg-clip-text text-transparent">Valentine?</span>
+                💘
+            </h2>
+
+            <div class="buttons" id="btn-container">
+                <button id="yes-btn" class="btn btn-yes">YES 💖</button>
+                <button id="no-btn" class="btn btn-no">NO ❌</button>
+            </div>
+
+            <div class="footer-container">
+                <p class="footer-text">Choose wisely... 😏</p>
+                <p class="highlight">You + Me = Valentine's 💘</p>
+            </div>
+        </div>
+
+        <!-- Success content (Hidden initially) -->
+        <div id="success-content" class="hidden" style="display: none;">
+            <div class="card">
+                <h1 id="success-heading" class="success-title">Yayyy! 🎉</h1>
+                <h2 class="success-subtitle">I knew you would say Yes! 😍</h2>
+                <h3 class="success-subtitle" style="font-size: 1.5rem;">I love You Janeman 😘�</h3>
+
+                <div class="image-container">
+                    <img src="assets/celebration_happy_cat.png" alt="Celebration" class="celebration-img">
+                </div>
+
+                <!-- Romantic Message Section -->
+                <div id="romantic-section" style="margin: 0;">
+                    <h2 style="color: #db2777; font-weight: 900; font-size: 1.8rem; margin: 0rem;">
+                        You've made me the happiest! 💖
+                    </h2>
+                    <p
+                        style="color: #ec4899; font-style: italic; font-size: 1.1rem; margin-bottom: 1rem; opacity: 0.9;">
+                        "This Valentine's Day is going to be magical with you by my side..."
+                    </p>
+                    <div
+                        style="display: flex; justify-content: center; gap: 12px; margin-bottom: 1.2rem; font-size: 1.8rem;">
+                        <span style="color: #f87171;">❤️</span>
+                        <span style="color: #fb7185;">❤️</span>
+                        <span style="color: #f472b6;">❤️</span>
+                        <span style="color: #ec4899;">❤️</span>
+                        <span style="color: #db2777;">❤️</span>
+                    </div>
+                    <div id="celebrate-message"
+                        style="background: white; padding: 1.2rem 2rem; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <p style="color: #db2777; font-weight: 700; font-size: 1.3rem; margin: 0;">
+                            Can't wait to celebrate with you! 🌹
+                        </p>
+                    </div>
+                </div>
+
+                <p class="success-message">I knew you would! ❤️</p>
+                <p class="success-footer">See you soon Darling..! 😘</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
