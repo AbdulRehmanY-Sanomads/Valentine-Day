@@ -359,6 +359,7 @@ body::before {
     font-size: 2.5rem;
     color: #1f2937;
     margin-bottom: 0.5rem;
+    margin-top: 0px;
     animation: bounceIn 0.8s ease-out;
 }
 
@@ -455,6 +456,211 @@ body::before {
         transform: translateY(-100vh) rotate(15deg);
         opacity: 0.8;
     }
+}
+
+/* 💕 Heart Burst Effect for Success Screen */
+.heart-burst {
+    position: fixed;
+    pointer-events: none;
+    z-index: 1;
+    font-size: 12px;
+    opacity: 0;
+    animation: heartBurst 4s ease-out forwards;
+}
+
+@keyframes heartBurst {
+    0% {
+        opacity: 0;
+        transform: translate(0, 0) scale(0);
+    }
+
+    10% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(var(--tx), var(--ty)) scale(0.5);
+    }
+}
+
+/* Success screen heart clusters */
+.success-hearts-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+/* Share Modal */
+.share-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.share-modal-content {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 25px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.share-input {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #fce7f3;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-family: 'Nunito', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.share-input:focus {
+    outline: none;
+    border-color: #ec4899;
+    box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.1);
+}
+
+.share-link-box {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.share-link-input {
+    flex: 1;
+    padding: 0.8rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    background: #f9fafb;
+}
+
+.copy-btn {
+    padding: 0.8rem 1.2rem;
+    background: #ec4899;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.copy-btn:hover {
+    background: #db2777;
+    transform: scale(1.05);
+}
+
+.share-buttons {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 1rem;
+}
+
+.share-btn {
+    flex: 1;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 700;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.share-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.whatsapp {
+    background: #25D366;
+}
+
+.facebook {
+    background: #1877F2;
+}
+
+.instagram {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+.modal-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.modal-btn {
+    flex: 1;
+    padding: 1rem;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Nunito', sans-serif;
+}
+
+.modal-btn.primary {
+    background: linear-gradient(to right, #ec4899, #db2777);
+    color: white;
+}
+
+.modal-btn.primary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 20px rgba(236, 72, 153, 0.4);
+}
+
+.modal-btn.secondary {
+    background: #f3f4f6;
+    color: #6b7280;
+}
+
+.modal-btn.secondary:hover {
+    background: #e5e7eb;
 }
 
 /* Mobile Adjustments */

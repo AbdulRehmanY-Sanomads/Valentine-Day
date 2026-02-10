@@ -218,8 +218,179 @@ document.addEventListener('DOMContentLoaded', () => {
             // Start INFINITE celebrations!
             triggerInfiniteCelebration();
             spawnBalloons();
+            createHeartBurstEffect();
+
+            // Show share modal after 1 minute
+            setTimeout(() => {
+                showShareModal();
+            }, 10000); // 60 seconds = 1 minute
         }, 1200); // Match slower curtain
     });
+
+    // Share Modal Functionality
+    function showShareModal() {
+        const modal = document.getElementById('share-modal');
+        const nameInput = document.getElementById('share-name-input');
+        const generateBtn = document.getElementById('generate-link-btn');
+        const closeBtn = document.getElementById('close-modal-btn');
+        const linkContainer = document.getElementById('share-link-container');
+        const generatedLink = document.getElementById('generated-link');
+        const copyBtn = document.getElementById('copy-link-btn');
+        const whatsappBtn = document.getElementById('share-whatsapp');
+        const facebookBtn = document.getElementById('share-facebook');
+        const twitterBtn = document.getElementById('share-twitter');
+        const instagramBtn = document.getElementById('share-instagram');
+
+        let isLinkGenerated = false;
+
+        modal.style.display = 'flex';
+
+        // Watch for name input changes after link is generated
+        nameInput.addEventListener('input', () => {
+            if (isLinkGenerated) {
+                generateBtn.textContent = 'Regenerate Link';
+                generateBtn.disabled = false;
+                generateBtn.style.background = 'linear-gradient(to right, #f59e0b, #d97706)';
+            }
+        });
+
+        // Generate/Regenerate Link
+        generateBtn.addEventListener('click', () => {
+            const recipientName = nameInput.value.trim();
+            if (!recipientName) {
+                alert('Please enter a name!');
+                return;
+            }
+
+            // Get current URL and add name parameter
+            const baseUrl = window.location.origin + window.location.pathname;
+            const shareUrl = `${baseUrl}?name=${encodeURIComponent(recipientName)}`;
+
+            generatedLink.value = shareUrl;
+            linkContainer.style.display = 'block';
+            generateBtn.textContent = 'Link Generated! ✨';
+            generateBtn.disabled = true;
+            generateBtn.style.background = 'linear-gradient(to right, #ec4899, #db2777)';
+            isLinkGenerated = true;
+        });
+
+        // Copy Link
+        copyBtn.addEventListener('click', () => {
+            generatedLink.select();
+            document.execCommand('copy');
+            copyBtn.textContent = '✅ Copied!';
+            setTimeout(() => {
+                copyBtn.textContent = '📋 Copy';
+            }, 2000);
+        });
+
+        // Share to WhatsApp
+        whatsappBtn.addEventListener('click', () => {
+            const link = generatedLink.value;
+            if (!link) {
+                alert('Please generate a link first!');
+                return;
+            }
+            const message = `💕 I have a special Valentine's question for you! ${link}`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
+        });
+
+        // Share to Facebook
+        facebookBtn.addEventListener('click', () => {
+            const link = generatedLink.value;
+            if (!link) {
+                alert('Please generate a link first!');
+                return;
+            }
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(link)}`, '_blank');
+        });
+
+        // Share to Twitter
+        twitterBtn.addEventListener('click', () => {
+            const link = generatedLink.value;
+            if (!link) {
+                alert('Please generate a link first!');
+                return;
+            }
+            const text = '💕 I have a special Valentine\'s question for you!';
+            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(link)}`, '_blank');
+        });
+
+        // Share to Instagram (opens Instagram with clipboard instruction)
+        instagramBtn.addEventListener('click', () => {
+            const link = generatedLink.value;
+            if (!link) {
+                alert('Please generate a link first!');
+                return;
+            }
+            // Copy link to clipboard
+            generatedLink.select();
+            document.execCommand('copy');
+            alert('Link copied! 📋\n\nInstagram doesn\'t support direct link sharing.\nPaste this link in your Instagram bio, story, or DM! 💕');
+        });
+
+        // Close Modal
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        // Close on outside click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    }
+
+
+    // 💕 Heart Burst Effect for Success Screen
+    function createHeartBurstEffect() {
+        const container = document.createElement('div');
+        container.className = 'success-hearts-container';
+        document.body.appendChild(container);
+
+        function createHeartCluster(x, y) {
+            const heartCount = 15 + Math.floor(Math.random() * 10);
+            const hearts = ['💕', '💗', '💖', '💘', '❤️', '💓', '💝'];
+
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart-burst';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+
+                const angle = (Math.PI * 2 * i) / heartCount;
+                const distance = 100 + Math.random() * 200;
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance;
+
+                heart.style.left = x + 'px';
+                heart.style.top = y + 'px';
+                heart.style.setProperty('--tx', tx + 'px');
+                heart.style.setProperty('--ty', ty + 'px');
+                heart.style.animationDelay = (Math.random() * 0.3) + 's';
+
+                container.appendChild(heart);
+
+                setTimeout(() => heart.remove(), 4000);
+            }
+        }
+
+        // Create multiple bursts at random positions
+        function createRandomBurst() {
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+            createHeartCluster(x, y);
+        }
+
+        // Initial bursts
+        for (let i = 0; i < 5; i++) {
+            setTimeout(createRandomBurst, i * 300);
+        }
+
+        // Continuous bursts
+        setInterval(createRandomBurst, 2000);
+    }
+
 
     // 🎊 INFINITE Celebration with Variety
     function triggerInfiniteCelebration() {

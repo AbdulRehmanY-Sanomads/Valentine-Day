@@ -90,6 +90,41 @@
                 <p class="success-footer">See you soon Darling..! 😘</p>
             </div>
         </div>
+
+        <!-- Share Modal -->
+        <div id="share-modal" class="share-modal" style="display: none;">
+            <div class="share-modal-content">
+                <h2 style="color: #db2777; margin-bottom: 1rem;">💕 Share the Love!</h2>
+                <p style="color: #6b7280; margin-bottom: 1.5rem;">Want to send this to someone special?</p>
+
+                <input type="text" id="share-name-input" placeholder="Enter their name..." class="share-input" />
+
+                <div id="share-link-container" style="display: none; margin-top: 1.5rem;">
+                    <p style="color: #6b7280; font-size: 0.9rem; margin-bottom: 0.5rem;">Your personalized link:</p>
+                    <div class="share-link-box">
+                        <input type="text" id="generated-link" readonly class="share-link-input" />
+                        <button id="copy-link-btn" class="copy-btn">📋 Copy</button>
+                    </div>
+
+                    <div class="share-buttons">
+                        <button id="share-whatsapp" class="share-btn whatsapp">
+                            <span>💬 WhatsApp</span>
+                        </button>
+                        <button id="share-facebook" class="share-btn facebook">
+                            <span>📘 Facebook</span>
+                        </button>
+                        <button id="share-instagram" class="share-btn instagram">
+                            <span>📸 Instagram</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button id="generate-link-btn" class="modal-btn primary">Generate Link</button>
+                    <button id="close-modal-btn" class="modal-btn secondary">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
