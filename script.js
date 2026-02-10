@@ -220,15 +220,51 @@ document.addEventListener('DOMContentLoaded', () => {
             spawnBalloons();
             createHeartBurstEffect();
 
-            // Show share modal after 1 minute
+            // Show countdown message
+            const countdownDiv = document.createElement('div');
+            countdownDiv.id = 'surprise-countdown';
+            countdownDiv.style.cssText = `
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                background: linear-gradient(135deg, #ec4899, #db2777);
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 15px;
+                font-weight: 700;
+                font-size: 1rem;
+                box-shadow: 0 10px 30px rgba(236, 72, 153, 0.4);
+                z-index: 9999;
+                animation: pulse 2s infinite;
+            `;
+            document.body.appendChild(countdownDiv);
+
+            let timeLeft = 30;
+            countdownDiv.innerHTML = `🎁 Surprise is loading... (${timeLeft}s)`;
+
+            const countdownInterval = setInterval(() => {
+                timeLeft--;
+                if (timeLeft > 0) {
+                    countdownDiv.innerHTML = `🎁 Surprise is loading... (${timeLeft}s)`;
+                } else {
+                    clearInterval(countdownInterval);
+                    countdownDiv.remove();
+                }
+            }, 1000);
+
+            // Show share modal after 30 seconds
             setTimeout(() => {
-                showShareModal();
-            }, 60000); // 60 seconds = 1 minute
+                showShareModal(countdownDiv, countdownInterval);
+            }, 30000); // 30 seconds
         }, 1200); // Match slower curtain
     });
 
     // Share Modal Functionality
-    function showShareModal() {
+    function showShareModal(countdownDiv, countdownInterval) {
+        // Remove countdown when modal appears
+        if (countdownDiv) countdownDiv.remove();
+        if (countdownInterval) clearInterval(countdownInterval);
+
         const modal = document.getElementById('share-modal');
         const nameInput = document.getElementById('share-name-input');
         const generateBtn = document.getElementById('generate-link-btn');
@@ -329,9 +365,48 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Link copied! 📋\n\nInstagram doesn\'t support direct link sharing.\nPaste this link in your Instagram bio, story, or DM! 💕');
         });
 
-        // Close Modal
-        closeBtn.addEventListener('click', () => {
+        // Close Modal - Clone button to remove old listeners
+        const newCloseBtn = closeBtn.cloneNode(true);
+        closeBtn.parentNode.replaceChild(newCloseBtn, closeBtn);
+
+        newCloseBtn.addEventListener('click', () => {
             modal.style.display = 'none';
+
+            // Show countdown again
+            const newCountdownDiv = document.createElement('div');
+            newCountdownDiv.id = 'surprise-countdown';
+            newCountdownDiv.style.cssText = `
+                position: fixed;
+                top: 30px;
+                background: linear-gradient(135deg, #ec4899, #db2777);
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 15px;
+                font-weight: 700;
+                font-size: 1rem;
+                box-shadow: 0 10px 30px rgba(236, 72, 153, 0.4);
+                z-index: 9999;
+                animation: pulse 2s infinite;
+            `;
+            document.body.appendChild(newCountdownDiv);
+
+            let timeLeft = 30;
+            newCountdownDiv.innerHTML = `🎁 Surprise is loading... (${timeLeft}s)`;
+
+            const newCountdownInterval = setInterval(() => {
+                timeLeft--;
+                if (timeLeft > 0) {
+                    newCountdownDiv.innerHTML = `🎁 Surprise is loading... (${timeLeft}s)`;
+                } else {
+                    clearInterval(newCountdownInterval);
+                    newCountdownDiv.remove();
+                }
+            }, 1000);
+
+            // Reopen modal after 30 seconds
+            setTimeout(() => {
+                showShareModal(newCountdownDiv, newCountdownInterval);
+            }, 30000);
         });
 
         // Close on outside click

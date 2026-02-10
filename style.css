@@ -133,7 +133,7 @@ body::before {
 
 /* Typewriter Animation */
 .typewriter-container {
-    min-height: 80px;
+    min-height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -141,15 +141,15 @@ body::before {
 }
 
 .typewriter-text {
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 600;
     color: #ec4899;
     font-style: italic;
     text-align: center;
-    line-height: 1.6;
+    line-height: 1.4;
     max-width: 600px;
     margin: 0;
-    padding: 0.5rem 1rem;
+    padding: 0.4rem 1rem;
     border-left: 3px solid #ec4899;
     background: linear-gradient(to right, rgba(236, 72, 153, 0.05), transparent);
     border-radius: 8px;
@@ -173,6 +173,16 @@ body::before {
     100% {
         opacity: 0;
     }
+}
+
+.custom-heading {
+    margin: 0;
+    font-size: 1.3rem;
+    font-family: 'Nunito', cursive, sans-serif;
+    letter-spacing: 2px;
+    font-weight: 700;
+    color: #6b7280;
+    font-style: italic;
 }
 
 
@@ -671,6 +681,21 @@ body::before {
 
     .sub-heading {
         font-size: 1.6rem;
+    }
+
+    .typewriter-container {
+        min-height: 40px;
+    }
+
+    .typewriter-text {
+        font-size: 0.85rem;
+        padding: 0.3rem 0.8rem;
+        line-height: 1.3;
+    }
+
+    .custom-heading {
+        font-size: 1rem;
+        letter-spacing: 1px;
     }
 
     .card {
