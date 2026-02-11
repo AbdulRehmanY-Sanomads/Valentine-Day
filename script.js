@@ -225,8 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
             countdownDiv.id = 'surprise-countdown';
             countdownDiv.style.cssText = `
                 position: fixed;
-                bottom: 30px;
-                right: 30px;
+                top: 20px;
                 background: linear-gradient(135deg, #ec4899, #db2777);
                 color: white;
                 padding: 1rem 1.5rem;
@@ -236,11 +235,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 box-shadow: 0 10px 30px rgba(236, 72, 153, 0.4);
                 z-index: 9999;
                 animation: pulse 2s infinite;
+                cursor: default;
+                transition: all 0.3s ease;
             `;
             document.body.appendChild(countdownDiv);
 
             let timeLeft = 30;
-            countdownDiv.innerHTML = `🎁 Surprise is loading... (${timeLeft}s)`;
+            countdownDiv.innerHTML = `🎁 Surprise is loading...⏱️ (${timeLeft}s)`;
 
             const countdownInterval = setInterval(() => {
                 timeLeft--;
@@ -248,22 +249,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     countdownDiv.innerHTML = `🎁 Surprise is loading... (${timeLeft}s)`;
                 } else {
                     clearInterval(countdownInterval);
-                    countdownDiv.remove();
+                    countdownDiv.innerHTML = `🎁 Click for Surprise! ✨`;
+                    countdownDiv.style.cursor = 'pointer';
+
+                    // Add click listener to open modal
+                    countdownDiv.addEventListener('click', () => {
+                        showShareModal();
+                    });
                 }
             }, 1000);
-
-            // Show share modal after 30 seconds
-            setTimeout(() => {
-                showShareModal(countdownDiv, countdownInterval);
-            }, 30000); // 30 seconds
         }, 1200); // Match slower curtain
     });
 
     // Share Modal Functionality
-    function showShareModal(countdownDiv, countdownInterval) {
-        // Remove countdown when modal appears
-        if (countdownDiv) countdownDiv.remove();
-        if (countdownInterval) clearInterval(countdownInterval);
+    function showShareModal() {
 
         const modal = document.getElementById('share-modal');
         const nameInput = document.getElementById('share-name-input');
@@ -274,7 +273,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const copyBtn = document.getElementById('copy-link-btn');
         const whatsappBtn = document.getElementById('share-whatsapp');
         const facebookBtn = document.getElementById('share-facebook');
-        const twitterBtn = document.getElementById('share-twitter');
         const instagramBtn = document.getElementById('share-instagram');
 
         let isLinkGenerated = false;
@@ -341,17 +339,6 @@ document.addEventListener('DOMContentLoaded', () => {
             window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(link)}`, '_blank');
         });
 
-        // Share to Twitter
-        twitterBtn.addEventListener('click', () => {
-            const link = generatedLink.value;
-            if (!link) {
-                alert('Please generate a link first!');
-                return;
-            }
-            const text = '💕 I have a special Valentine\'s question for you!';
-            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(link)}`, '_blank');
-        });
-
         // Share to Instagram (opens Instagram with clipboard instruction)
         instagramBtn.addEventListener('click', () => {
             const link = generatedLink.value;
@@ -371,42 +358,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         newCloseBtn.addEventListener('click', () => {
             modal.style.display = 'none';
-
-            // Show countdown again
-            const newCountdownDiv = document.createElement('div');
-            newCountdownDiv.id = 'surprise-countdown';
-            newCountdownDiv.style.cssText = `
-                position: fixed;
-                top: 30px;
-                background: linear-gradient(135deg, #ec4899, #db2777);
-                color: white;
-                padding: 1rem 1.5rem;
-                border-radius: 15px;
-                font-weight: 700;
-                font-size: 1rem;
-                box-shadow: 0 10px 30px rgba(236, 72, 153, 0.4);
-                z-index: 9999;
-                animation: pulse 2s infinite;
-            `;
-            document.body.appendChild(newCountdownDiv);
-
-            let timeLeft = 30;
-            newCountdownDiv.innerHTML = `🎁 Surprise is loading... (${timeLeft}s)`;
-
-            const newCountdownInterval = setInterval(() => {
-                timeLeft--;
-                if (timeLeft > 0) {
-                    newCountdownDiv.innerHTML = `🎁 Surprise is loading... (${timeLeft}s)`;
-                } else {
-                    clearInterval(newCountdownInterval);
-                    newCountdownDiv.remove();
-                }
-            }, 1000);
-
-            // Reopen modal after 30 seconds
-            setTimeout(() => {
-                showShareModal(newCountdownDiv, newCountdownInterval);
-            }, 30000);
         });
 
         // Close on outside click

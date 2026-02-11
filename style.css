@@ -48,7 +48,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100%;
     width: 100%;
 }
 
@@ -535,7 +535,7 @@ body::before {
 
 .share-modal-content {
     background: white;
-    padding: 2.5rem;
+    padding: 1rem;
     border-radius: 25px;
     max-width: 500px;
     width: 90%;
@@ -556,7 +556,7 @@ body::before {
 }
 
 .share-input {
-    width: 100%;
+    width: 90%;
     padding: 1rem;
     border: 2px solid #fce7f3;
     border-radius: 12px;
@@ -701,7 +701,7 @@ body::before {
     .card {
         padding: 2.5rem 1.5rem;
         min-height: 450px;
-        width: 92%;
+        width: 90%;
         zoom: 0.8;
     }
 
